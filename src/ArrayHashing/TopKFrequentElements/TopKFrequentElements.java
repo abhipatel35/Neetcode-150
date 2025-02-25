@@ -36,28 +36,28 @@ public class TopKFrequentElements {
 
     //2. HEAP
 
-     public static int[] topKFrequent(int[] nums, int k){
+     public static int[] topKFrequent(int[] nums, int k) {
 
          //same step 1
-         HashMap<Integer,Integer> countN = new HashMap<>();
-         for (int num : nums){
-             countN.put(num, countN.getOrDefault(num, 0) +1);
+         HashMap<Integer, Integer> countN = new HashMap<>();
+         for (int num : nums) {
+             countN.put(num, countN.getOrDefault(num, 0) + 1);
          }
 
          //Step 2: Use a Min-Heap (PriorityQueue) to Keep the Top k Frequent Elements
-         PriorityQueue<int[]> heapQ = new PriorityQueue<>((a,b) -> a[0] -b[0]);// The comparator : ensures that the heap sorts elements by frequency in ascending order.
-         for(Map.Entry<Integer, Integer> entry : countN.entrySet()){
+         PriorityQueue<int[]> heapQ = new PriorityQueue<>((a, b) -> a[0] - b[0]);// The comparator : ensures that the heap sorts elements by frequency in ascending order.
+         for (Map.Entry<Integer, Integer> entry : countN.entrySet()) {
              // push each (frequency, number) pair into the heap
-             heapQ.offer(new int[] {entry.getValue(), entry.getKey()});
+             heapQ.offer(new int[]{entry.getValue(), entry.getKey()});
              //If the heap size exceeds k, we remove (poll) the smallest element (lowest frequency).
-             if (heapQ.size() > k){
+             if (heapQ.size() > k) {
                  heapQ.poll();
              }
          }
 
          //Step 3: create an array result of size k
          int[] result = new int[k];
-         for (int i =0 ; i<k; i++){
+         for (int i = 0; i < k; i++) {
              // Extract Elements from the Heap (removing the most frequent first)
              result[i] = heapQ.poll()[1]; // Since we stored elements as {frequency, number}, we return only number
          }
