@@ -47,7 +47,7 @@ public class TopKFrequentElements {
          //Step 2: Use a Min-Heap (PriorityQueue) to Keep the Top k Frequent Elements
          PriorityQueue<int[]> heapQ = new PriorityQueue<>((a,b) -> a[0] -b[0]);// The comparator : ensures that the heap sorts elements by frequency in ascending order.
          for(Map.Entry<Integer, Integer> entry : countN.entrySet()){
-             // push each (frequency, number) pair into the heap.
+             // push each (frequency, number) pair into the heap
              heapQ.offer(new int[] {entry.getValue(), entry.getKey()});
              //If the heap size exceeds k, we remove (poll) the smallest element (lowest frequency).
              if (heapQ.size() > k){
